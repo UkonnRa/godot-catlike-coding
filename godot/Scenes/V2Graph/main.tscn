@@ -1,15 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhsa5b4uxji5s"]
+[gd_scene load_steps=2 format=3 uid="uid://ddxsfcpgr7uv8"]
 
-[ext_resource type="Script" uid="uid://cp4q81j6ypk2g" path="res://Scenes/V2Graph/Graph.cs" id="1_6kw0s"]
-[ext_resource type="Script" uid="uid://fmj2ykuw2416" path="res://Scenes/V2Graph/FPSLabel.cs" id="2_vg5ht"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_abysm"]
+viewport_path = NodePath("Graph/SubViewport")
 
-[node name="Node3D" type="Node3D"]
+[node name="Main" type="Node3D"]
 
-[node name="FPSLabel" type="Label" parent="."]
-offset_right = 91.0
+[node name="FPSLabel" type="FPSLabel" parent="."]
+offset_right = 40.0
 offset_bottom = 23.0
 text = "Hello World"
-script = ExtResource("2_vg5ht")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0)
@@ -17,6 +16,19 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 3, 3)
 
-[node name="Node3D" type="Node3D" parent="."]
-script = ExtResource("1_6kw0s")
-_Resolution = 200
+[node name="Graph" type="Graph" parent="."]
+resolution = 10
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.270436, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="Graph"]
+billboard = 1
+texture = SubResource("ViewportTexture_abysm")
+
+[node name="SubViewport" type="SubViewport" parent="Graph"]
+transparent_bg = true
+size = Vector2i(40, 23)
+
+[node name="Label" type="Label" parent="Graph/SubViewport"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "test"

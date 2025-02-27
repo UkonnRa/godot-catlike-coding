@@ -1,0 +1,14 @@
+[configuration]
+entry_symbol = "gdext_rust_init"
+compatibility_minimum = 4.4
+reloadable = true
+
+[libraries]
+linux.debug.x86_64 =     "res://../rust/target/debug/libgodot_catlike_coding.so"
+linux.release.x86_64 =   "res://../rust/target/release/libgodot_catlike_coding.so"
+windows.debug.x86_64 =   "res://../rust/target/debug/godot_catlike_coding.dll"
+windows.release.x86_64 = "res://../rust/target/release/godot_catlike_coding.dll"
+macos.debug =            "res://../rust/target/debug/libgodot_catlike_coding.dylib"
+macos.release =          "res://../rust/target/release/libgodot_catlike_coding.dylib"
+macos.debug.arm64 =      "res://../rust/target/debug/libgodot_catlike_coding.dylib"
+macos.release.arm64 =    "res://../rust/target/release/libgodot_catlike_coding.dylib"
