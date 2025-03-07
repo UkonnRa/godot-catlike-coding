@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dc4bsfpupurkm"]
+[gd_scene load_steps=4 format=3 uid="uid://dc4bsfpupurkm"]
+
+[ext_resource type="PackedScene" path="res://Scenes/BackToHome.tscn" id="1_yxf3b"]
 
 [sub_resource type="Environment" id="Environment_idc3j"]
 background_mode = 1
@@ -78,3 +80,6 @@ grow_vertical = 0
 text = "Based on Catlike Coding's Mathematical Surfaces Tutorial
 Press SPACE to adjust animation speed"
 horizontal_alignment = 1
+
+[node name="BackToHome" parent="UI" instance=ExtResource("1_yxf3b")]
+layout_mode = 1

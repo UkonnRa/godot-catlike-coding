@@ -1,4 +1,4 @@
-use godot::classes::{CsgBox3D, Label, Node3D, OptionButton, StandardMaterial3D, Time};
+use godot::classes::{CsgBox3D, Node3D, StandardMaterial3D, Time};
 use godot::prelude::*;
 
 use crate::basics::mathematical_surfaces::shared;
@@ -18,6 +18,11 @@ pub struct Ch24MathSurface {
     #[export]
     #[init(val = 0)]
     function_index: i32,
+
+    /// Transition value (0-1) for blending between current function and next
+    #[export]
+    #[init(val = 0.0)]
+    transition: f32,
 
     /// Animation speed multiplier
     #[export]
@@ -77,6 +82,13 @@ impl INode3D for Ch24MathSurface {
         let time = Time::singleton().get_ticks_msec() as f32 / 1000.0 * self.animation_speed;
         let func_index = self.function_index; // Store function index before loops
 
+        // Calculate the next function for transition (wrapping if needed)
+        let next_func_index = if self.transition > 0.0 {
+            (func_index + 1) % 5
+        } else {
+            func_index
+        };
+
         // Calculate grid parameters
         let grid_size = 2.0; // Size of the grid in world units
         let res = self.resolution;
@@ -93,8 +105,8 @@ impl INode3D for Ch24MathSurface {
                 let u = (i as f32 / (res - 1) as f32) * grid_size - 1.0;
                 let v = (j as f32 / (res - 1) as f32) * grid_size - 1.0;
 
-                // Calculate position based on function type and current function index
-                let pos = match func_index {
+                // Calculate positions for both current and next function
+                let current_pos = match func_index {
                     0 => {
                         // Wave function (1D) - only uses u
                         let y = shared::wave(u + time);
@@ -135,12 +147,53 @@ impl INode3D for Ch24MathSurface {
                     }
                 };
 
+                // Position for the next function
+                let next_pos = match next_func_index {
+                    0 => {
+                        let y = shared::wave(u + time);
+                        Vector3::new(u, y, v)
+                    }
+                    1 => {
+                        let y = shared::multi_wave(u + time);
+                        Vector3::new(u, y, v)
+                    }
+                    2 => {
+                        let y = shared::ripple(u, v + time);
+                        Vector3::new(u, y, v)
+                    }
+                    3 => {
+                        let r = 0.9 + (shared::wave(u + time) * 0.1);
+                        let s = u * std::f32::consts::PI;
+                        let t = v * 2.0 * std::f32::consts::PI;
+                        let x = r * s.sin() * t.cos();
+                        let y = r * s.cos();
+                        let z = r * s.sin() * t.sin();
+                        Vector3::new(x, y, z)
+                    }
+                    4 => shared::torus(u, v, time),
+                    _ => {
+                        let y = shared::wave(u + time);
+                        Vector3::new(u, y, v)
+                    }
+                };
+
+                // Blend between current and next position
+                let blend_pos = if self.transition > 0.0 {
+                    Vector3::new(
+                        current_pos.x * (1.0 - self.transition) + next_pos.x * self.transition,
+                        current_pos.y * (1.0 - self.transition) + next_pos.y * self.transition,
+                        current_pos.z * (1.0 - self.transition) + next_pos.z * self.transition,
+                    )
+                } else {
+                    current_pos
+                };
+
                 // Update cube position
                 let cube = &mut self.points[idx];
-                cube.set_position(pos);
+                cube.set_position(blend_pos);
 
                 // Update color based on position
-                let color = shared::compute_position_color(pos.x, pos.y, pos.z);
+                let color = shared::compute_position_color(blend_pos.x, blend_pos.y, blend_pos.z);
                 if let Some(material) = cube.get_material() {
                     if let Ok(mut std_material) = material.try_cast::<StandardMaterial3D>() {
                         std_material.set_albedo(color);
@@ -198,8 +251,8 @@ impl Ch24MathSurface {
             }
             4 => {
                 // Torus function
-                let torus = shared::torus(u, v, t);
-                torus
+
+                shared::torus(u, v, t)
             }
             _ => {
                 // Default to wave

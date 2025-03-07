@@ -1,4 +1,5 @@
 // Organize the Catlike Coding tutorials into separate modules
+mod back_to_home;
 mod basics;
 mod fps_label;
 mod launcher;
@@ -20,6 +21,12 @@ pub use basics::building_a_graph::GraphController;
 pub use basics::mathematical_surfaces::MathSurfaceController;
 pub use basics::mathematical_surfaces::MultiSurfaceController;
 pub use launcher::DemoLauncher;
+
+// Re-export the FPS label
+pub use fps_label::FpsLabel;
+
+// Re-export the back to home button
+pub use back_to_home::BackToHome;
 
 use godot::prelude::*;
 

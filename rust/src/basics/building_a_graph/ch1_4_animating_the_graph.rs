@@ -61,19 +61,21 @@ impl INode3D for Graph {
     }
 
     fn process(&mut self, _delta: f64) {
+        // Get the current time for animation
         let time = Time::singleton().get_ticks_msec() as f32 / 1000.0 * self.animation_speed;
 
         // Update each point in the line
-        for (i, cube) in self.points.iter_mut().enumerate() {
+        for cube in self.points.iter_mut() {
             // Get current position
             let mut position = cube.get_position();
 
             // Calculate X position (doesn't change)
             let x = position.x;
 
-            // Calculate new Y position using sine wave, exactly as in the tutorial:
-            // position.y = Mathf.Sin(Mathf.PI * (position.x + time));
-            position.y = (std::f32::consts::PI * (x + time)).sin();
+            // Calculate new Y position using sine wave function
+            // Directly calculate sine rather than calling self.function to avoid borrowing issues
+            let y = (std::f32::consts::PI * (x + time)).sin();
+            position.y = y;
 
             // Update the position
             cube.set_position(position);
@@ -100,5 +102,11 @@ impl Graph {
     /// Calculate cube size based on step
     fn size(&self) -> Vector3 {
         Vector3::ONE * self.step() * 0.9 // Slightly smaller than step to leave gaps
+    }
+
+    /// The sine wave function for animation
+    #[allow(dead_code)]
+    fn function(&self, x: f32, t: f32) -> f32 {
+        (std::f32::consts::PI * (x + t)).sin()
     }
 }

@@ -15,15 +15,12 @@ pub fn create_graph_material() -> Gd<StandardMaterial3D> {
 
 /// Creates a color gradient material for the graph
 /// This attempts to mimic the shader effect from the tutorial
+#[allow(dead_code)]
 pub fn create_gradient_material() -> Gd<StandardMaterial3D> {
     let mut material = StandardMaterial3D::new_gd();
 
     // Use a blue-green gradient (similar to the tutorial)
-    material.set_albedo(Color::from_rgb(0.0, 0.7, 0.8));
-
-    // Add some shininess
-    material.set_metallic(0.1);
-    material.set_roughness(0.7);
+    material.set_albedo(Color::from_rgb(0.0, 0.8, 0.5));
 
     material
 }

@@ -61,6 +61,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "3D Parametric Surfaces"
 
+[node name="PerformanceButton" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Performance Test"
+
 [node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
@@ -71,6 +76,21 @@ text = "Based on tutorials by Jasper Flick (Catlike Coding)
 https://catlikecoding.com/unity/tutorials/basics/"
 horizontal_alignment = 1
 
+[node name="FpsCounter" type="FpsLabel" parent="."]
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 36.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 2
+
 [connection signal="pressed" from="Panel/VBoxContainer/GraphButton" to="." method="on_graph_button_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/MathButton" to="." method="on_math_button_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/MultiButton" to="." method="on_multi_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/PerformanceButton" to="." method="on_performance_button_pressed"]

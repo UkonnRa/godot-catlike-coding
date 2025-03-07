@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7hse3avqmefq"]
+[gd_scene load_steps=4 format=3 uid="uid://bwidfon6idwcb"]
 
 [ext_resource type="Texture2D" uid="uid://jw1aupvv7b6" path="res://icon.svg" id="1_3h43c"]
-[ext_resource type="PackedScene" path="res://Scenes/BackToHome.tscn" id="2_xrfgf"]
+[ext_resource type="PackedScene" uid="uid://cs4hcyqhsnyfn" path="res://Scenes/BackToHome.tscn" id="2_kcqal"]
 
 [sub_resource type="Environment" id="Environment_ocdv5"]
 background_mode = 1
@@ -13,10 +13,14 @@ glow_enabled = true
 glow_intensity = 0.6
 glow_bloom = 0.5
 
-[node name="MathematicalSurface" type="MathSurfaceController"]
+[node name="PerformanceTester" type="MathSurfaceController"]
+auto_cycle = true
+transition_mode = 1
+cycle_time = 3.0
+transition_speed = 1.5
 
 [node name="MathSurface" type="Ch24MathSurface" parent="."]
-function_index = 2
+resolution = 40
 animation_speed = 0.6
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -44,7 +48,7 @@ anchor_right = 1.0
 offset_bottom = 26.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 20
-text = "Mathematical Surface - Ripple Function"
+text = "Performance Test - Random Cycling"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Info"]
@@ -53,7 +57,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -85.0
+offset_top = -125.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
@@ -64,13 +68,16 @@ alignment = 1
 
 [node name="Label" type="Label" parent="Info/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Use number keys 1-5 to change function:
-1: Wave  2: MultiWave  3: Ripple  4: Sphere  5: Torus"
+text = "Controls:
+1-5: Change function
+C: Toggle auto-cycling
+R: Toggle cycle/random mode
+B: Toggle resolution (20/40/60/100)"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="Info/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Based on Catlike Coding's Mathematical Surfaces Tutorial"
+text = "Based on Catlike Coding's Measuring Performance Tutorial"
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="Info/HBoxContainer"]
@@ -79,5 +86,31 @@ layout_mode = 2
 texture = ExtResource("1_3h43c")
 expand_mode = 3
 
-[node name="BackToHome" parent="Info" instance=ExtResource("2_xrfgf")]
+[node name="FpsCounter" type="FpsLabel" parent="Info"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 36.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 2
+
+[node name="Resolution" type="Label" parent="Info"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 10.0
+offset_right = 116.0
+offset_bottom = 36.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 18
+text = "Res: 40x40"
+
+[node name="BackToHome" parent="Info" instance=ExtResource("2_kcqal")]
 layout_mode = 1

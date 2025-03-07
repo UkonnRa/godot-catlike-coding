@@ -2,7 +2,7 @@ use godot::classes::{CsgBox3D, Node3D, StandardMaterial3D, Time};
 use godot::prelude::*;
 
 use crate::basics::mathematical_surfaces::shared;
-use crate::basics::mathematical_surfaces::shared::{FunctionName, MathFunction1D, MathFunction2D};
+use crate::basics::mathematical_surfaces::shared::FunctionName;
 
 /// MathSurface component for Chapter 2 - Using Delegates
 /// This implementation works with function delegates
@@ -77,7 +77,7 @@ impl INode3D for Ch22MathSurface {
         let func_index = self.function_index; // Store function index before loop
 
         // Update each point in the line
-        for (_i, cube) in self.points.iter_mut().enumerate() {
+        for cube in self.points.iter_mut() {
             // Get current position
             let position = cube.get_position();
 
