@@ -1,7 +1,8 @@
 {
     "recommendations": [
         "editorconfig.editorconfig",
-        "rust-lang.rust-analyzer",
-        "tamasfe.even-better-toml"
+        "tamasfe.even-better-toml",
+        "sonarsource.sonarlint-vscode",
+        "vadimcn.vscode-lldb"
     ]
 }

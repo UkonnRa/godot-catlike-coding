@@ -1,7 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddxsfcpgr7uv8"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_abysm"]
-viewport_path = NodePath("Graph/SubViewport")
+[gd_scene format=3 uid="uid://ddxsfcpgr7uv8"]
 
 [node name="Main" type="Node3D"]
 
@@ -16,19 +13,15 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 3, 3)
 
+[node name="Ch11Graph" type="Ch11Graph" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.37373, 1.17554, 0)
+
+[node name="Ch12Graph" type="Ch12Graph" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.152071, 1.17554, 0)
+
+[node name="Ch13Graph" type="Ch13Graph" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.38727, -0.25976, 0)
+
 [node name="Graph" type="Graph" parent="."]
 resolution = 10
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.270436, 0)
-
-[node name="Sprite3D" type="Sprite3D" parent="Graph"]
-billboard = 1
-texture = SubResource("ViewportTexture_abysm")
-
-[node name="SubViewport" type="SubViewport" parent="Graph"]
-transparent_bg = true
-size = Vector2i(40, 23)
-
-[node name="Label" type="Label" parent="Graph/SubViewport"]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "test"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.553543, -0.326344, 0)

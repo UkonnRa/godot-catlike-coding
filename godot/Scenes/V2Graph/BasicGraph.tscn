@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=3 uid="uid://csgbgx1p1xmed"]
+
+[sub_resource type="Environment" id="Environment_kl4n1"]
+background_mode = 1
+background_color = Color(0.121569, 0.121569, 0.188235, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.6, 0.6, 0.6, 1)
+tonemap_mode = 2
+glow_enabled = true
+glow_bloom = 0.2
+
+[node name="BasicGraph" type="GraphController"]
+
+[node name="Graph" type="Graph" parent="."]
+animation_speed = 0.6
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kl4n1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, 0.353553, -0.353553, 0, 0.707107, 0.707107, 0.5, -0.612372, 0.612372, 0, 2, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.7, 2)
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 26.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "Building a Graph"
+horizontal_alignment = 1
+
+[node name="Info" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -58.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Based on Catlike Coding's Building a Graph Tutorial
+Press SPACE to adjust animation speed"
+horizontal_alignment = 1

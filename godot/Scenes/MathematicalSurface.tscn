@@ -1,0 +1,79 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7hse3avqmefq"]
+
+[ext_resource type="Texture2D" uid="uid://jw1aupvv7b6" path="res://icon.svg" id="1_3h43c"]
+
+[sub_resource type="Environment" id="Environment_ocdv5"]
+background_mode = 1
+background_color = Color(0.145098, 0.145098, 0.239216, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.6, 0.6, 0.6, 1)
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.6
+glow_bloom = 0.5
+
+[node name="MathematicalSurface" type="MathSurfaceController"]
+
+[node name="MathSurface" type="Ch24MathSurface" parent="."]
+function_index = 2
+animation_speed = 0.6
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ocdv5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, 0.353553, -0.353553, 0, 0.707107, 0.707107, 0.5, -0.612372, 0.612372, 0, 2, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1.5, 3)
+
+[node name="Info" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Info"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 26.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 20
+text = "Mathematical Surface - Ripple Function"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Info"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -85.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Info/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Info/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Use number keys 1-5 to change function:
+1: Wave  2: MultiWave  3: Ripple  4: Sphere  5: Torus"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Info/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Based on Catlike Coding's Mathematical Surfaces Tutorial"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Info/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("1_3h43c")
+expand_mode = 3
